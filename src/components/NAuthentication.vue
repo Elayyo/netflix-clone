@@ -2,13 +2,10 @@
   <div class="relative">
     <div
       class="absolute bg-hero-image w-full h-screen bg-no-repeat bg-cover overflow-hidden brightness-75 -z-10 bg-fixed"
+      :style="{ top: '0', left: '0' }"
     ></div>
-    <header>
-      <img
-        src="../../public/images/logo.png"
-        alt="Netflix Logo"
-        class="h-20 m-20"
-      />
+    <header class="px-40 py-10">
+      <img src="../../public/images/logo.png" alt="Netflix Logo" class="h-20" />
     </header>
     <div
       class="flex items-center flex-col bg-black bg-opacity-80 rounded-lg"
@@ -49,7 +46,7 @@
         data-ripple-light="true"
         class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-red-700 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
       >
-        Button
+        Anmelden
       </button>
     </div>
   </div>
