@@ -21,15 +21,18 @@
       >
         Einloggen
       </h2>
-      <n-base-input-field :placeholder="'Email oder Username'" :mt="1" :mb="1"></n-base-input-field>
-      <n-base-input-field :placeholder="'Passwort'" :mb="1"></n-base-input-field>
-      <button
-        type="button"
-        data-ripple-light="true"
-        class="w-72 align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-red-700 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
-      >
-        Anmelden
-      </button>
+      <form>
+        <n-base-input-field :placeholder="'Email oder Username'" :mt="1" :mb="1"></n-base-input-field>
+        <n-base-input-field :placeholder="'Passwort'" :mb="1"></n-base-input-field>
+        <button
+          @click="sendRequest"
+          type="submit"
+          data-ripple-light="true"
+          class="w-72 align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-red-700 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+        >
+          Anmelden
+        </button>
+      </form>
       <div class="mt-4">
         <span class="text-gray-600 p">Noch keinen Account? </span>
         <button class="text-white" @click=" hideRegistration = !hideRegistration">Jetzt registrieren</button>
@@ -50,6 +53,26 @@ export default {
   data: function () {
     return {
       hideRegistration: false
+    }
+  },
+  methods: {
+    async sendRequest(){
+      const url = "http://localhost:8080/api/greetings";
+      try {
+        const response = await fetch(url,{
+          "headers": {
+            "Authorization": "Basic " + btoa("john:fun123")
+          }
+        });
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+
+        const json = await response.json();
+        console.log(json);
+      } catch (error) {
+        console.error(error.message);
+      }
     }
   }
 };
