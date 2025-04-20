@@ -22,8 +22,8 @@
         Einloggen
       </h2>
       <form>
-        <n-base-input-field :placeholder="'Email oder Username'" :mt="1" :mb="1"></n-base-input-field>
-        <n-base-input-field :placeholder="'Passwort'" :mb="1"></n-base-input-field>
+        <n-base-input-field :placeholder="'Email oder Username'" :mt="1" :mb="1" :input-type="'email'"></n-base-input-field>
+        <n-base-input-field :placeholder="'Passwort'" :mb="1" :input-type="'password'"></n-base-input-field>
         <button
           @click="sendRequest"
           type="submit"

@@ -2,7 +2,7 @@
   <div class="w-72" :style="{'margin-top': mt+'rem','margin-bottom': mb+'rem'}">
     <div class="relative w-full min-w-[200px] h-10">
       <input
-          type="text"
+          :type="inputType"
           class="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-gray-600 placeholder-shown:border-t-gray-600 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-gray-600 focus:border-white"
           placeholder=" "
       /><label
@@ -24,6 +24,9 @@ export default{
     },
     "mb": {
       type: Number
+    },
+    inputType: {
+      type: String
     }
   }
 }
