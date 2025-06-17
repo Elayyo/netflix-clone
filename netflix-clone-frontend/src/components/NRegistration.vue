@@ -16,6 +16,7 @@
     <div class="w-72 my-4">
       <div class="relative w-full min-w-[200px] h-10">
         <input
+            v-model="firstname"
             type="text"
             class="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-gray-600 placeholder-shown:border-t-gray-600 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-gray-600 focus:border-white"
             placeholder=" "
@@ -28,6 +29,7 @@
     <div class="w-72 mb-4">
       <div class="relative w-full min-w-[200px] h-10">
         <input
+            v-model="lastname"
             type="text"
             class="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-gray-600 placeholder-shown:border-t-gray-600 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-gray-600 focus:border-white"
             placeholder=" "
@@ -40,6 +42,7 @@
     <div class="w-72 mb-4">
       <div class="relative w-full min-w-[200px] h-10">
         <input
+            v-model="email"
             type="text"
             class="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-gray-600 placeholder-shown:border-t-gray-600 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-gray-600 focus:border-white"
             placeholder=" "
@@ -52,6 +55,7 @@
     <div class="w-72 mb-4">
       <div class="relative w-full min-w-[200px] h-10">
         <input
+            v-model="password"
             type="password"
             class="peer w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-gray-600 placeholder-shown:border-t-gray-600 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-gray-600 focus:border-white"
             placeholder=" "
@@ -62,11 +66,12 @@
       </div>
     </div>
     <button
-        type="button"
+        @click="createUser"
+        type="submit"
         data-ripple-light="true"
         class="w-72 align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-red-700 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
     >
-      registrieren
+      Registrieren
     </button>
     <div class="mt-4">
       <span class="text-gray-600 p">Du besitzt bereits einen Account? </span>
@@ -76,9 +81,47 @@
 </template>
 <script>
 export default {
+  data(){
+    return{
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: ''
+    }
+  },
   props:{
     flag: {
       type: Boolean
+    }
+  },
+  methods: {
+    createUser: async function(){
+        const userData = {
+          firstname: this.firstname,
+          lastname: this.lastname,
+          email: this.email,
+          password: this.password
+        }
+        try {
+          const response = await fetch('http://localhost:8080/api/users', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+          });
+
+          if (!response.ok) {
+            console.error(response.statusText);
+            throw new Error('Registrierung fehlgeschlagen');
+          }
+
+          const data = await response.json();
+          console.log('Registrierung erfolgreich:', data);
+          // Weiterleitung oder Erfolgsmeldung hier
+        } catch (error) {
+          console.error('Fehler bei der Registrierung:', error);
+        }
     }
   }
 }

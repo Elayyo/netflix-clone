@@ -11,18 +11,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
+    /*@Bean
     public WebMvcConfigurer corsConfig(){
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                registry.addMapping("/**")
-                       .allowedOrigins("http://localhost:8081/")
-                       .allowedMethods(HttpMethod.GET.name())
+                       .allowedOrigins("http://localhost:8082/#/")
+                       .allowedMethods(HttpMethod.POST.name())
                        .allowedHeaders(HttpHeaders.CONTENT_TYPE,
                                HttpHeaders.AUTHORIZATION);
             }
         };
-    }
+    }*/
 
 }
